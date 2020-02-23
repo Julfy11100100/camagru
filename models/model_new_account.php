@@ -73,14 +73,36 @@ function checkCreateAccountCorrectData($login, $password, $rep_password, $email)
 
 }
 
-function addNewAccount($login, $password, $email) {
+function addNewAccount($login, $password, $email, $token) {
 	$pdo = connectDB();
 
 	try {
-		$add = $pdo->prepare("INSERT INTO users (`login`,`password`,`email`) VALUES (?,?,?)");
-		$add->execute([$login,hash("sha256",$password),$email]);
+		$add = $pdo->prepare("INSERT INTO users (`login`,`password`,`email`,`token`) VALUES (?,?,?,?)");
+		$add->execute([$login,hash("sha256",$password),$email,$token]);
 		closeConnectDB($pdo);
 		return true;
 	}
 	catch(PDOException $e) {"CAN`T ADD NEW ACC:".$e->getMessage()." Aborting process<br>"; closeConnectDB($pdo);} 
+}
+
+function confirmationMail($login, $email, $token){
+	$link = "http://".$_SERVER['HTTP_HOST']."/controllers/controller_verify_account.php?token=".$token."&login=".$login;
+    $subject = "Confirm Camagru";
+    $content = "<html>
+                  <head>
+                    <title> Camagru </title>
+                    </head>
+                    <body>
+                    	<p>Hello " .$login. "! If you registered on the Camagru project, click on this link to confirm the registration.</p>
+                    	<a href='".$link."'>Confirm ! </a>
+                    </body>";
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'From: camagru2020@yandex.ru' . "\r\n";
+    if (mail($email, $subject, $content, $headers)) {
+		return (1);
+	}
+	else {
+		return (0);
+	}
 }

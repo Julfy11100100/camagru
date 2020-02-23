@@ -1,10 +1,10 @@
 <?php
 include ("model_connectDB.php");
 
-function checkLoginDBForLogin($login){
+function checkEmailDBForLogin($email){
 	$pdo = connectDB();
-	$query = $pdo->prepare("SELECT `id` FROM users WHERE `login`=:logi");
-	$query->execute(array(':logi' => $login));
+	$query = $pdo->prepare("SELECT `id` FROM users WHERE `email`=:email");
+	$query->execute(array(':email' => $email));
 	$res = $query->fetch();
 	closeConnectDB($pdo);
 	if ($res != null)
@@ -13,10 +13,10 @@ function checkLoginDBForLogin($login){
 		return true;
 }
 
-function checkPasswordDBForLogin($login, $password) {
+function checkPasswordDBForLogin($email, $password) {
 	$pdo = connectDB();
-	$query = $pdo->prepare("SELECT `password` FROM users WHERE `login`=:logi");
-	$query->execute(array(':logi' => $login));
+	$query = $pdo->prepare("SELECT `password` FROM users WHERE `email`=:email");
+	$query->execute(array(':email' => $email));
 	$res = $query->fetch();
 	closeConnectDB($pdo);
 	if (hash("sha256",$password) == $res["password"])
@@ -28,13 +28,30 @@ function checkPasswordDBForLogin($login, $password) {
 function checkLoginCorrectData($login, $password){
 	$errormassiv = Array();
 
-	if (!checkLoginDBForLogin($login)){
+	if (!checkEmailDBForLogin($login)){
 		if (!checkPasswordDBForLogin($login,$password)){
 			$errormassiv[] = "Wrong password";
 		}
 	}
 	else {
-		$errormassiv[] = "Login not found";
+		$errormassiv[] = "Email not found";
 	}
 	return ($errormassiv); 
+}
+
+function checkVerified($email) {
+	$pdo = connectDB();
+	$query = $pdo->prepare("SELECT `verified` FROM `users` WHERE `email`=:email");
+	$query->execute(array(':email' => $email));
+	$res = $query->fetch();
+	return($res["verified"]);
+}
+
+function getLoginByEmail($email){
+	$pdo = connectDB();
+	$query = $pdo->prepare("SELECT `login` FROM users WHERE `email`=:email");
+	$query->execute(array(':email' => $email));
+	$res = $query->fetch();
+	closeConnectDB($pdo);
+	return($res["login"]);
 }

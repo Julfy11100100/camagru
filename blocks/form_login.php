@@ -10,7 +10,7 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../css/style.css">
-    <title>Document</title>
+    <title>Log in</title>
 </head>
 <body>
 	<div class="head">
@@ -21,8 +21,8 @@ session_start();
 			<div class="form">
 				<div class="inner_form">
 					<form action="/controllers/controller_login.php" method="post">
-						<input type="text" name="login"
-						id="login" placeholder="Login">
+						<input type="text" name="email"
+						id="login" placeholder="Email">
 						<input type="password" name="password"
 						id="login" placeholder="Password">
 						<button class="btn btn-success"

@@ -1,5 +1,8 @@
 <?php
 session_start();
+if ($_SESSION["username"] == "") {
+	header('Location: http://'.$_SERVER['HTTP_HOST']."/index.php");
+}
 ?>
 
 <!doctype html>
@@ -10,7 +13,7 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../css/style.css">
-	<title>Document</title>
+	<title>Account_information</title>
 	<script type="text/javascript" src="../js/account_information.js" ></script>
 </head>
 <body>
@@ -36,6 +39,13 @@ session_start();
 					<button id="button_new_login" style="display: block">New Login</button>
 					<button id="button_new_password" style="display: block">New Password</button>
 					<button id="button_new_email" style="display: block">New Email</button>
+					<button id="button_change" style="display: block">Change comment status</button>
+					<div id="comment_status1" style="display: none">
+						<p>Comments_to_email ON</p>
+					</div>
+					<div id="comment_status2" style="display: none">
+						<p>Comments_to_email OFF</p>
+					</div>
 				</div>
 				<?php if ($_SESSION["errors"] && !empty($_SESSION["errors"])) {
 					echo ('<div class="divErrors">');

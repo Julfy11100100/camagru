@@ -82,4 +82,5 @@ function createImage($main_img, $overlay_mass, $user_name){
 		return true;
 	}
 	catch(PDOException $e) {"CAN`T ADD NEW IMAGE:".$e->getMessage()." Aborting process<br>"; closeConnectDB($pdo);}
+	return (1);
 }

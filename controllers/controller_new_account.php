@@ -14,7 +14,11 @@ if (!empty($_SESSION["errors"])) {
 }
 // иначе добавляем в бд и перенаправляем на страницу с просьбой верификации 
 else {
-	addNewAccount($_POST["login"], $_POST["password"], $_POST["email"]);
-	header('Location: http://'.$_SERVER['HTTP_HOST']."/blocks/form_please_check.php");
+	$permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$token = substr(str_shuffle($permitted_chars), 0, 16);
+	addNewAccount($_POST["login"], $_POST["password"], $_POST["email"], $token);
+	if (confirmationMail($_POST["login"], $_POST["email"],$token)) {
+		header('Location: http://'.$_SERVER['HTTP_HOST']."/blocks/form_please_check.php");
+	}
 }
 

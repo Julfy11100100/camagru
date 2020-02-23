@@ -9,7 +9,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../css/style.css">
-    <title>Document</title>
+    <title>Recovery password</title>
 </head>
 <body>
 	<div class="head">
@@ -19,8 +19,8 @@
 		<div class="main">
 			<div class="form">
 				<div class="inner_form">
-					<form action="forgot_password.php" method="post">
-						<input type="text" name="Email"
+					<form action="/controllers/controller_fargot_password.php" method="post">
+						<input type="text" name="email"
 						id="login" placeholder="Email">
 						<button class="btn btn-success"
 						type ="submit">Submit</button>

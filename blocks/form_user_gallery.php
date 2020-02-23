@@ -1,7 +1,9 @@
 <?php
 session_start();
+if ($_SESSION["username"] == "") {
+	header('Location: http://'.$_SERVER['HTTP_HOST']."/index.php");
+}
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -10,8 +12,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../css/style.css">
-	<title>Main gallery</title>
-	<script type="text/javascript" src="/js/main_gallery.js" ></script>
+	<title>User gallery</title>
+	<script type="text/javascript" src="/js/user_gallery.js" ></script>
 </head>
 <body>
 	<div class="head">

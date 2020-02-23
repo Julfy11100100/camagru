@@ -10,7 +10,7 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="../css/style.css">
-    <title>New account</title>
+	<title>New password</title>
 </head>
 <body>
 	<div class="head">
@@ -20,17 +20,12 @@ session_start();
 		<div class="main">
 			<div class="form">
 				<div class="inner_form">
-					<form action="/controllers/controller_new_account.php" method="post">
-						<input type="text" name="login"
-						id="login" placeholder="Login">
-						<input type="text" name="email"
-						id="Email" placeholder="Email">
-						<input type="password" name="password"
-						id="password" placeholder="Password">
+					<form action="/controllers/controller_new_password.php" method="post">
+						<input type="password" name="new_password"
+						id="new_password" placeholder="New password">
 						<input type="password" name="rep_password"
-						id="rep_password" placeholder="Repeat password">
-						<button class="btn btn-success"
-						type ="submit">Submit</button>
+						id="old_password" placeholder="Repeat password">
+						<button class="btn btn-success" type ="submit" id="submit">Submit</button>
 					</form>
 				</div>
 				<?php if ($_SESSION["errors"] && !empty($_SESSION["errors"])) {

@@ -19,14 +19,14 @@ if ($_SESSION["username"] != "")
 			    <ul class="main-menu">
 					<?php if ($flag) {echo ('
 						<li><a href="../index.php">MAIN</a></li>
-						<li><a href="#">GALLERY</a></li>
+						<li><a href="../blocks/form_user_gallery.php">GALLERY</a></li>
 						<li><a href="../blocks/form_new_photo.php">PHOTO</a></li>
 						<li><a href="../controllers/controller_logout.php">LOGOUT</a></li>
 						<li><a href="../blocks/form_account_information.php">ACCOUNT</a></li>	
 					');}
 					else { echo ('
 						<li><a href="../index.php">MAIN</a></li>
-						<li><a href="../blocks/form_login.php">LOGIN</a></li>
+						<li><a href="../blocks/form_login.php">LOG IN</a></li>
 						<li><a href="../blocks/form_new_account.php">NEW ACC</a></li>
 					');}?>
                 </ul>

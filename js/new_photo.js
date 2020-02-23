@@ -63,8 +63,8 @@ window.onload = function () {
 
     if (hasGetUserMedia()) {
 		navigatorCamera = navigator.mozGetUserMedia==undefined?1:0;
-		console.log(navigatorCamera);
-        console.log('getUserMedia is supported in this browser');
+		//console.log(navigatorCamera);
+        //console.log('getUserMedia is supported in this browser');
         start_button.addEventListener("click", startStopStream);
         if (bool_webcam){
             take_button.disabled;
@@ -72,7 +72,7 @@ window.onload = function () {
         take_button.addEventListener('click', takeShot);
     }
     else {
-        console.log('getUserMedia is not supported in this browser');
+        //console.log('getUserMedia is not supported in this browser');
         take_button.remove();
         video.remove();
     }
@@ -187,7 +187,6 @@ function addToBlockShot() {
 
 	for (var i = 0; i < shot_box.children.length; i += 1) {
 		if (shot_box.children[i].id === 'main_img') {
-			console.log("нашел в shot_box ща как удалю!")
 			shot_box.children[i].parentNode.removeChild(shot_box.children[i]);
 			break;
 		}
@@ -195,7 +194,6 @@ function addToBlockShot() {
 
 	for (var i = 0; i < this.children.length; i += 1) {
 		if (this.children[i].id === 'shot_box') {
-			console.log("нашел в this ща как добавлю!")
 			shot_box.appendChild(this.children[i].firstChild);
 			break;
 		}
@@ -333,8 +331,8 @@ function sendImageData() {
 			var save_canvas = document.createElement('canvas');
 			var save_ctx = save_canvas.getContext('2d');
 
-			console.log("imgwidth: " +img.naturalWidth);
-			console.log("imgheight: " +img.naturalHeight);
+			//console.log("imgwidth: " +img.naturalWidth);
+			//console.log("imgheight: " +img.naturalHeight);
 			save_canvas.width = img.naturalWidth;
 			save_canvas.height = img.naturalHeight;
 			save_ctx.drawImage(img, 0, 0);
@@ -348,23 +346,25 @@ function sendImageData() {
 		elem = shot.children[i];
 		if (elem.tagName == 'IMG') {
 			over_img = elem.id + "/";
-			console.log("elem.style.left"+elem.style.left);
 			over_img += elem.style.left==""?"0":elem.style.left;
 			over_img += "/";
-			console.log("elem.style.top"+elem.style.top);
 			over_img += elem.style.top==""?"0":elem.style.top;
 			overlay.push(over_img);
-			console.log(i+": "+over_img);
 		}
 	}
 
 	formData.append('overlay', overlay);
 
 	var request = new XMLHttpRequest();
+
+	request.onload = () => {
+		if (request.responseText == "true"){
+			alert("Your image has been successfully uploaded!");
+		}
+	}
+
 	request.open("POST", "../controllers/controller_new_photo.php", true);
 	request.send(formData);
-	window.location.href=("../index.php");
-	//window.location.href=("../controllers/controller_new_photo.php");
 }
 
 /************************************/
