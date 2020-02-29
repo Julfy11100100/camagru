@@ -129,10 +129,10 @@ function deleteImgUser($username, $img_title) {
 	try {
 		$delete = $pdo->prepare("DELETE FROM `images` WHERE `title`=:img AND `login`=:logi");
 		$delete->execute(array(':img' => $img_title, ':logi' => $username));
-		$delete = $pdo->prepare("DELETE FROM `comments` WHERE `title`=:img");
-		$delete->execute(array(':img' => $img_title, ':logi' => $username));
-		$delete = $pdo->prepare("DELETE FROM `likes` WHERE `title`=:img");
-		$delete->execute(array(':img' => $img_title, ':logi' => $username));
+		$delete = $pdo->prepare("DELETE FROM `comments` WHERE `img_title`=:img");
+		$delete->execute(array(':img' => $img_title));
+		$delete = $pdo->prepare("DELETE FROM `likes` WHERE `img_title`=:img");
+		$delete->execute(array(':img' => $img_title));
 	}
 	catch(PDOException $e) {"CAN`T DELETE IMG:".$e->getMessage()." Aborting process<br>"; closeConnectDB($pdo);}
 }

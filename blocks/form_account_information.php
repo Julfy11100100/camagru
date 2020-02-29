@@ -41,10 +41,10 @@ if ($_SESSION["username"] == "") {
 					<button id="button_new_email" style="display: block">New Email</button>
 					<button id="button_change" style="display: block">Change comment status</button>
 					<div id="comment_status1" style="display: none">
-						<p>Comments_to_email ON</p>
+						<p>Сomment notifications will be sent to your mail</p>
 					</div>
 					<div id="comment_status2" style="display: none">
-						<p>Comments_to_email OFF</p>
+						<p>Сomment notifications will not be sent to your mail</p>
 					</div>
 				</div>
 				<?php if ($_SESSION["errors"] && !empty($_SESSION["errors"])) {
